@@ -17,22 +17,36 @@ const app = new PIXI.Application({
 // 将应用画布添加到DOM中
 document.body.appendChild(app.view as any);
 
-// 创建一个矩形
-const rectangle = new PIXI.Graphics()
-rectangle.beginFill(0x66ccff)
-rectangle.drawRect(200,200,164,64)
-rectangle.endFill()
+// 显示helloworld文字
+const text = new PIXI.Text("Hello world", {
+	fontFamily: "楷体",
+	fontSize: 100,
+	fill: "pink",
+	align: "center",
+});
 
-// 将矩形添加到舞台
-app.stage.addChild(rectangle)
+// 设置文字位置
+text.x = app.screen.width / 2;
+text.y = app.screen.height / 2;
+
+// 设置文字锚点
+text.anchor.set(0.5);
+app.stage.addChild(text);
+
+// 创建一个圆形
+const circle = new PIXI.Graphics();
+circle.beginFill("yellow");
+circle.drawCircle(app.screen.width / 2, app.screen.height / 2, 100);
+circle.endFill();
+
+// 创建一个精灵
+const sprite = PIXI.Sprite.from("https://pic.rmb.bdstatic.com/05b0ea405c9e690ab51627853a13de56.jpeg");
+sprite.width = app.screen.width;
+sprite.height = app.screen.height;
+
+// 使用文字作为精灵的遮罩
+sprite.mask = text
+// sprite.mask = circle;
+
+app.stage.addChild(sprite);
 </script>
-
-<style lang="css">
-canvas {
-	width: 100vw;
-	height: 100vh;
-	position: absolute;
-	left: 0;
-	top: 0;
-}
-</style>

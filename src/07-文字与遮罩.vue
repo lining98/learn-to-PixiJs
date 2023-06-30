@@ -1,0 +1,52 @@
+<template>
+	<div>app</div>
+</template>
+
+<script setup lang="ts">
+// 导入pixi
+import * as PIXI from "pixi.js";
+
+// 创建应用
+const app = new PIXI.Application({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	backgroundColor: 0x1099bb,
+	resolution: window.devicePixelRatio || 1, // 像素比
+});
+
+// 将应用画布添加到DOM中
+document.body.appendChild(app.view as any);
+
+// 显示helloworld文字
+const text = new PIXI.Text("你好", {
+	fontFamily: "楷体",
+	fontSize: 100,
+	fill: "pink",
+	align: "center",
+});
+
+// 设置文字位置
+text.x = app.screen.width / 2;
+text.y = app.screen.height / 2;
+
+// 设置文字锚点
+text.anchor.set(0.5);
+app.stage.addChild(text);
+
+// 创建一个圆形
+const circle = new PIXI.Graphics();
+circle.beginFill("yellow");
+circle.drawCircle(app.screen.width / 2, app.screen.height / 2, 100);
+circle.endFill();
+
+// 创建一个精灵
+const sprite = PIXI.Sprite.from("https://pic.rmb.bdstatic.com/05b0ea405c9e690ab51627853a13de56.jpeg");
+sprite.width = app.screen.width;
+sprite.height = app.screen.height;
+
+// 使用文字作为精灵的遮罩
+sprite.mask = text
+// sprite.mask = circle;
+
+app.stage.addChild(sprite);
+</script>

@@ -5,6 +5,7 @@
 <script setup lang="ts">
 // 导入pixi
 import * as PIXI from "pixi.js";
+import { Sprite } from "pixi.js";
 
 // 创建应用
 const app = new PIXI.Application({
@@ -66,7 +67,7 @@ container.addChild(groundSprite);
 
 // 创建仙人掌精灵
 const cactusTexture = new PIXI.Texture(baseTexture, new PIXI.Rectangle(515, 0, 30, 60));
-const cactusSprite = new PIXI.Sprite(cactusTexture);
+const cactusSprite = new Sprite(cactusTexture);
 cactusSprite.x = window.innerWidth / 2;
 cactusSprite.y = window.innerHeight - 50 - 60;
 container.addChild(cactusSprite);
@@ -162,11 +163,11 @@ function gameOver() {
 }
 
 window.addEventListener("keydown", (e) => {
-	if (e.code == "Space" && isGaming) {
-		// console.log("跳跃");
+	if (e.code == "Space") {
+		console.log("跳跃");
 		runAnimation.visible = false;
 		jumpSprite.visible = true;
-		// jumpVelocity = 20; // 无限跳
+		jumpVelocity = 20;
 	}
 });
 </script>
